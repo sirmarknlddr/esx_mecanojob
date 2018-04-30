@@ -97,7 +97,7 @@ function StopNPCJob(cancel)
 
 end
 
-function OpenmechanicActionsMenu()
+function OpenMechanicActionsMenu()
 
   local elements = {
     {label = _U('vehicle_list'), value = 'vehicle_list'},
@@ -208,7 +208,7 @@ function OpenmechanicActionsMenu()
               end,
               function(data, menu)
                 menu.close()
-                OpenmechanicActionsMenu()
+                OpenMechanicActionsMenu()
               end
             )
 
@@ -355,7 +355,7 @@ function OpenmechanicCraftMenu()
   end
 end
 
-function OpenMobilemechanicActionsMenu()
+function OpenMobileMechanicActionsMenu()
 
   ESX.UI.Menu.CloseAll()
 
@@ -909,7 +909,7 @@ AddEventHandler('esx_mechanicjob:hasEnteredMarker', function(zone)
     NPCTargetDeleterZone = true
   end
 
-  if zone == 'mechanicActions' then
+  if zone == ‘MechanicActions' then
     CurrentAction     = 'mechanic_actions_menu'
     CurrentActionMsg  = _U('open_actions')
     CurrentActionData = {}
@@ -1037,7 +1037,7 @@ end)
 
 -- Create Blips
 Citizen.CreateThread(function()
-  local blip = AddBlipForCoord(Config.Zones.mechanicActions.Pos.x, Config.Zones.mechanicActions.Pos.y, Config.Zones.mechanicActions.Pos.z)
+  local blip = AddBlipForCoord(Config.Zones.MechanicActions.Pos.x, Config.Zones.MechanicActions.Pos.y, Config.Zones.MechanicActions.Pos.z)
   SetBlipSprite (blip, 446)
   SetBlipDisplay(blip, 4)
   SetBlipScale  (blip, 1.8)
@@ -1160,7 +1160,7 @@ Citizen.CreateThread(function()
           if IsControlJustReleased(0, 38) and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
 
             if CurrentAction == 'mechanic_actions_menu' then
-                OpenmechanicActionsMenu()
+                OpenMechanicActionsMenu()
             end
 
             if CurrentAction == 'mechanic_harvest_menu' then
@@ -1202,7 +1202,7 @@ Citizen.CreateThread(function()
         end
 
         if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
-            OpenMobilemechanicActionsMenu()
+            OpenMobileMechanicActionsMenu()
         end
 
         if IsControlJustReleased(0, Keys['DELETE']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
