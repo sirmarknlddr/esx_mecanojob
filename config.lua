@@ -9,7 +9,7 @@ Config.NPCJobEarnings             = { min = 15, max = 40 }
 Config.Locale                     = 'fr'
 
 Config.Zones = {
-  MecanoActions = {
+  MechanicActions = {
     Pos   = { x = -347.291, y = -133.370, z = 38.009 },
     Size  = { x = 1.5, y = 1.5, z = 1.0 },
     Color = { r = 204, g = 204, b = 0 },
