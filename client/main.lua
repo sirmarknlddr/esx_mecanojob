@@ -92,12 +92,12 @@ function StopNPCJob(cancel)
   if cancel then
     ESX.ShowNotification(_U('mission_canceled'))
   else
-    TriggerServerEvent('esx_mecanojob:onNPCJobCompleted')
+    TriggerServerEvent('esx_mechanicjob:onNPCJobCompleted')
   end
 
 end
 
-function OpenMecanoActionsMenu()
+function OpenmechanicActionsMenu()
 
   local elements = {
     {label = _U('vehicle_list'), value = 'vehicle_list'},
@@ -113,7 +113,7 @@ function OpenMecanoActionsMenu()
   ESX.UI.Menu.CloseAll()
 
   ESX.UI.Menu.Open(
-    'default', GetCurrentResourceName(), 'mecano_actions',
+    'default', GetCurrentResourceName(), 'mechanic_actions',
     {
       title    = _U('mechanic'),
       align    = 'top-left',
@@ -151,7 +151,7 @@ function OpenMecanoActionsMenu()
                     TaskWarpPedIntoVehicle(playerPed,  vehicle,  -1)
                   end)
 
-                  TriggerServerEvent('esx_society:removeVehicleFromGarage', 'mecano', vehicleProps)
+                  TriggerServerEvent('esx_society:removeVehicleFromGarage', 'mechanic', vehicleProps)
 
                 end,
                 function(data, menu)
@@ -159,7 +159,7 @@ function OpenMecanoActionsMenu()
                 end
               )
 
-            end, 'mecano')
+            end, 'mechanic')
 
           else
 
@@ -200,7 +200,7 @@ function OpenMecanoActionsMenu()
                       else
                         ESX.ShowNotification(_U('service_full') .. inServiceCount .. '/' .. maxInService)
                       end
-                    end, 'mecano')
+                    end, 'mechanic')
                     break
                   end
                 end
@@ -208,7 +208,7 @@ function OpenMecanoActionsMenu()
               end,
               function(data, menu)
                 menu.close()
-                OpenMecanoActionsMenu()
+                OpenmechanicActionsMenu()
               end
             )
 
@@ -246,7 +246,7 @@ function OpenMecanoActionsMenu()
       end
 
       if data.current.value == 'boss_actions' then
-        TriggerEvent('esx_society:openBossMenu', 'mecano', function(data, menu)
+        TriggerEvent('esx_society:openBossMenu', 'mechanic', function(data, menu)
           menu.close()
         end)
       end
@@ -254,14 +254,14 @@ function OpenMecanoActionsMenu()
     end,
     function(data, menu)
       menu.close()
-      CurrentAction     = 'mecano_actions_menu'
+      CurrentAction     = 'mechanic_actions_menu'
       CurrentActionMsg  = _U('open_actions')
       CurrentActionData = {}
     end
   )
 end
 
-function OpenMecanoHarvestMenu()
+function OpenmechanicHarvestMenu()
 
   if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
     local elements = {
@@ -273,7 +273,7 @@ function OpenMecanoHarvestMenu()
     ESX.UI.Menu.CloseAll()
 
     ESX.UI.Menu.Open(
-      'default', GetCurrentResourceName(), 'mecano_harvest',
+      'default', GetCurrentResourceName(), 'mechanic_harvest',
       {
         title    = _U('harvest'),
         align    = 'top-left',
@@ -282,23 +282,23 @@ function OpenMecanoHarvestMenu()
       function(data, menu)
         if data.current.value == 'gaz_bottle' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startHarvest')
+          TriggerServerEvent('esx_mechanicjob:startHarvest')
         end
 
         if data.current.value == 'fix_tool' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startHarvest2')
+          TriggerServerEvent('esx_mechanicjob:startHarvest2')
         end
 
         if data.current.value == 'caro_tool' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startHarvest3')
+          TriggerServerEvent('esx_mechanicjob:startHarvest3')
         end
 
       end,
       function(data, menu)
         menu.close()
-        CurrentAction     = 'mecano_harvest_menu'
+        CurrentAction     = 'mechanic_harvest_menu'
         CurrentActionMsg  = _U('harvest_menu')
         CurrentActionData = {}
       end
@@ -308,7 +308,7 @@ function OpenMecanoHarvestMenu()
   end
 end
 
-function OpenMecanoCraftMenu()
+function OpenmechanicCraftMenu()
   if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
 
     local elements = {
@@ -320,7 +320,7 @@ function OpenMecanoCraftMenu()
     ESX.UI.Menu.CloseAll()
 
     ESX.UI.Menu.Open(
-      'default', GetCurrentResourceName(), 'mecano_craft',
+      'default', GetCurrentResourceName(), 'mechanic_craft',
       {
         title    = _U('craft'),
         align    = 'top-left',
@@ -329,23 +329,23 @@ function OpenMecanoCraftMenu()
       function(data, menu)
         if data.current.value == 'blow_pipe' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startCraft')
+          TriggerServerEvent('esx_mechanicjob:startCraft')
         end
 
         if data.current.value == 'fix_kit' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startCraft2')
+          TriggerServerEvent('esx_mechanicjob:startCraft2')
         end
 
         if data.current.value == 'caro_kit' then
           menu.close()
-          TriggerServerEvent('esx_mecanojob:startCraft3')
+          TriggerServerEvent('esx_mechanicjob:startCraft3')
         end
 
       end,
       function(data, menu)
         menu.close()
-        CurrentAction     = 'mecano_craft_menu'
+        CurrentAction     = 'mechanic_craft_menu'
         CurrentActionMsg  = _U('craft_menu')
         CurrentActionData = {}
       end
@@ -355,12 +355,12 @@ function OpenMecanoCraftMenu()
   end
 end
 
-function OpenMobileMecanoActionsMenu()
+function OpenMobilemechanicActionsMenu()
 
   ESX.UI.Menu.CloseAll()
 
   ESX.UI.Menu.Open(
-    'default', GetCurrentResourceName(), 'mobile_mecano_actions',
+    'default', GetCurrentResourceName(), 'mobile_mechanic_actions',
     {
       title    = _U('mechanic'),
       align    = 'top-left',
@@ -391,7 +391,7 @@ function OpenMobileMecanoActionsMenu()
               if closestPlayer == -1 or closestDistance > 3.0 then
                 ESX.ShowNotification(_U('no_players_nearby'))
               else
-                TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(closestPlayer), 'society_mecano', _U('mechanic'), amount)
+                TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(closestPlayer), 'society_mechanic', _U('mechanic'), amount)
               end
             end
           end,
@@ -581,7 +581,7 @@ function OpenMobileMecanoActionsMenu()
 
                 if CurrentlyTowedVehicle == NPCTargetTowable then
                   ESX.Game.DeleteVehicle(NPCTargetTowable)
-                  TriggerServerEvent('esx_mecanojob:onNPCJobMissionCompleted')
+                  TriggerServerEvent('esx_mechanicjob:onNPCJobMissionCompleted')
                   StopNPCJob()
                   NPCTargetDeleterZone = false
 
@@ -607,7 +607,7 @@ function OpenMobileMecanoActionsMenu()
       if data.current.value == 'object_spawner' then
 
         ESX.UI.Menu.Open(
-          'default', GetCurrentResourceName(), 'mobile_mecano_actions_spawn',
+          'default', GetCurrentResourceName(), 'mobile_mechanic_actions_spawn',
           {
             title    = _U('objects'),
             align    = 'top-left',
@@ -657,7 +657,7 @@ end
 
 function OpenGetStocksMenu()
 
-  ESX.TriggerServerCallback('esx_mecanojob:getStockItems', function(items)
+  ESX.TriggerServerCallback('esx_mechanicjob:getStockItems', function(items)
 
     print(json.encode(items))
 
@@ -694,7 +694,7 @@ function OpenGetStocksMenu()
               menu.close()
               OpenGetStocksMenu()
 
-              TriggerServerEvent('esx_mecanojob:getStockItem', itemName, count)
+              TriggerServerEvent('esx_mechanicjob:getStockItem', itemName, count)
             end
 
           end,
@@ -715,7 +715,7 @@ end
 
 function OpenPutStocksMenu()
 
-ESX.TriggerServerCallback('esx_mecanojob:getPlayerInventory', function(inventory)
+ESX.TriggerServerCallback('esx_mechanicjob:getPlayerInventory', function(inventory)
 
     local elements = {}
 
@@ -756,7 +756,7 @@ ESX.TriggerServerCallback('esx_mecanojob:getPlayerInventory', function(inventory
               menu.close()
               OpenPutStocksMenu()
 
-              TriggerServerEvent('esx_mecanojob:putStockItems', itemName, count)
+              TriggerServerEvent('esx_mechanicjob:putStockItems', itemName, count)
             end
 
           end,
@@ -776,8 +776,8 @@ ESX.TriggerServerCallback('esx_mecanojob:getPlayerInventory', function(inventory
 end
 
 
-RegisterNetEvent('esx_mecanojob:onHijack')
-AddEventHandler('esx_mecanojob:onHijack', function()
+RegisterNetEvent('esx_mechanicjob:onHijack')
+AddEventHandler('esx_mechanicjob:onHijack', function()
   local playerPed = GetPlayerPed(-1)
   local coords    = GetEntityCoords(playerPed)
 
@@ -817,8 +817,8 @@ AddEventHandler('esx_mecanojob:onHijack', function()
   end
 end)
 
-RegisterNetEvent('esx_mecanojob:onCarokit')
-AddEventHandler('esx_mecanojob:onCarokit', function()
+RegisterNetEvent('esx_mechanicjob:onCarokit')
+AddEventHandler('esx_mechanicjob:onCarokit', function()
   local playerPed = GetPlayerPed(-1)
   local coords    = GetEntityCoords(playerPed)
 
@@ -845,8 +845,8 @@ AddEventHandler('esx_mecanojob:onCarokit', function()
   end
 end)
 
-RegisterNetEvent('esx_mecanojob:onFixkit')
-AddEventHandler('esx_mecanojob:onFixkit', function()
+RegisterNetEvent('esx_mechanicjob:onFixkit')
+AddEventHandler('esx_mechanicjob:onFixkit', function()
   local playerPed = GetPlayerPed(-1)
   local coords    = GetEntityCoords(playerPed)
 
@@ -899,7 +899,7 @@ AddEventHandler('esx:setJob', function(job)
   PlayerData.job = job
 end)
 
-AddEventHandler('esx_mecanojob:hasEnteredMarker', function(zone)
+AddEventHandler('esx_mechanicjob:hasEnteredMarker', function(zone)
 
   if zone == NPCJobTargetTowable then
 
@@ -909,20 +909,20 @@ AddEventHandler('esx_mecanojob:hasEnteredMarker', function(zone)
     NPCTargetDeleterZone = true
   end
 
-  if zone == 'MecanoActions' then
-    CurrentAction     = 'mecano_actions_menu'
+  if zone == 'mechanicActions' then
+    CurrentAction     = 'mechanic_actions_menu'
     CurrentActionMsg  = _U('open_actions')
     CurrentActionData = {}
   end
 
   if zone == 'Garage' then
-    CurrentAction     = 'mecano_harvest_menu'
+    CurrentAction     = 'mechanic_harvest_menu'
     CurrentActionMsg  = _U('harvest_menu')
     CurrentActionData = {}
   end
 
   if zone == 'Craft' then
-    CurrentAction     = 'mecano_craft_menu'
+    CurrentAction     = 'mechanic_craft_menu'
     CurrentActionMsg  = _U('craft_menu')
     CurrentActionData = {}
   end
@@ -943,33 +943,33 @@ AddEventHandler('esx_mecanojob:hasEnteredMarker', function(zone)
 
 end)
 
-AddEventHandler('esx_mecanojob:hasExitedMarker', function(zone)
+AddEventHandler('esx_mechanicjob:hasExitedMarker', function(zone)
 
   if zone =='VehicleDelivery' then
     NPCTargetDeleterZone = false
   end
 
   if zone == 'Craft' then
-    TriggerServerEvent('esx_mecanojob:stopCraft')
-    TriggerServerEvent('esx_mecanojob:stopCraft2')
-    TriggerServerEvent('esx_mecanojob:stopCraft3')
+    TriggerServerEvent('esx_mechanicjob:stopCraft')
+    TriggerServerEvent('esx_mechanicjob:stopCraft2')
+    TriggerServerEvent('esx_mechanicjob:stopCraft3')
   end
 
   if zone == 'Garage' then
-    TriggerServerEvent('esx_mecanojob:stopHarvest')
-    TriggerServerEvent('esx_mecanojob:stopHarvest2')
-    TriggerServerEvent('esx_mecanojob:stopHarvest3')
+    TriggerServerEvent('esx_mechanicjob:stopHarvest')
+    TriggerServerEvent('esx_mechanicjob:stopHarvest2')
+    TriggerServerEvent('esx_mechanicjob:stopHarvest3')
   end
 
   CurrentAction = nil
   ESX.UI.Menu.CloseAll()
 end)
 
-AddEventHandler('esx_mecanojob:hasEnteredEntityZone', function(entity)
+AddEventHandler('esx_mechanicjob:hasEnteredEntityZone', function(entity)
 
   local playerPed = GetPlayerPed(-1)
 
-  if PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not IsPedInAnyVehicle(playerPed, false) then
+  if PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' and not IsPedInAnyVehicle(playerPed, false) then
     CurrentAction     = 'remove_entity'
     CurrentActionMsg  = _U('press_remove_obj')
     CurrentActionData = {entity = entity}
@@ -977,7 +977,7 @@ AddEventHandler('esx_mecanojob:hasEnteredEntityZone', function(entity)
 
 end)
 
-AddEventHandler('esx_mecanojob:hasExitedEntityZone', function(entity)
+AddEventHandler('esx_mechanicjob:hasExitedEntityZone', function(entity)
 
   if CurrentAction == 'remove_entity' then
     CurrentAction = nil
@@ -989,7 +989,7 @@ RegisterNetEvent('esx_phone:loaded')
 AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
   local specialContact = {
     name       = _U('mechanic'),
-    number     = 'mecano',
+    number     = 'mechanic',
     base64Icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAA4BJREFUWIXtll9oU3cUx7/nJA02aSSlFouWMnXVB0ejU3wcRteHjv1puoc9rA978cUi2IqgRYWIZkMwrahUGfgkFMEZUdg6C+u21z1o3fbgqigVi7NzUtNcmsac40Npltz7S3rvUHzxQODec87vfD+/e0/O/QFv7Q0beV3QeXqmgV74/7H7fZJvuLwv8q/Xeux1gUrNBpN/nmtavdaqDqBK8VT2RDyV2VHmF1lvLERSBtCVynzYmcp+A9WqT9kcVKX4gHUehF0CEVY+1jYTTIwvt7YSIQnCTvsSUYz6gX5uDt7MP7KOKuQAgxmqQ+neUA+I1B1AiXi5X6ZAvKrabirmVYFwAMRT2RMg7F9SyKspvk73hfrtbkMPyIhA5FVqi0iBiEZMMQdAui/8E4GPv0oAJkpc6Q3+6goAAGpWBxNQmTLFmgL3jSJNgQdGv4pMts2EKm7ICJB/aG0xNdz74VEk13UYCx1/twPR8JjDT8wttyLZtkoAxSb8ZDCz0gdfKxWkFURf2v9qTYH7SK7rQIDn0P3nA0ehixvfwZwE0X9vBE/mW8piohhl1WH18UQBhYnre8N/L8b8xQvlx4ACbB4NnzaeRYDnKm0EALCMLXy84hwuTCXL/ExoB1E7qcK/8NCLIq5HcTT0i6u8TYbXUM1cAyyveVq8Xls7XhYrvY/4n3gC8C+dsmAzL1YUiyfWxvHzsy/w/dNd+KjhW2yvv/RfXr7x9QDcmo1he2RBiCCI1Q8jVj9szPNixVfgz+UiIGyDSrcoRu2J16d3I6e1VYvNSQjXpnucAcEPUOkGYZs/l4uUhowt/3kqu1UIv9n90fAY9jT3YBlbRvFTD4fw++wHjhiTRL/bG75t0jI2ITcHb5om4Xgmhv57xpGOg3d/NIqryOR7z+r+MC6qBJB/ZB2t9Om1D5lFm843G/3E3HI7Yh1xDRAfzLQr5EClBf/HBHK462TG2J0OABXeyWDPZ8VqxmBWYscpyghwtTd4EKpDTjCZdCNmzFM9k+4LHXIFACJN94Z6FiFEpKDQw9HndWsEuhnADVMhAUaYJBp9XrcGQKJ4qFE9k+6r2+MG3k5N8VQ22TVglbX2ZwOzX2VvNKr91zmY6S7N6zqZicVT2WNLyVSehESaBhxnOALfMeYX+K/S2yv7wmMAlvwyuR7FxQUyf0fgc/jztfkJr7XeGgC8BJJgWNV8ImT+AAAAAElFTkSuQmCC'
   }
   TriggerEvent('esx_phone:addSpecialContact', specialContact.name, specialContact.number, specialContact.base64Icon)
@@ -1037,7 +1037,7 @@ end)
 
 -- Create Blips
 Citizen.CreateThread(function()
-  local blip = AddBlipForCoord(Config.Zones.MecanoActions.Pos.x, Config.Zones.MecanoActions.Pos.y, Config.Zones.MecanoActions.Pos.z)
+  local blip = AddBlipForCoord(Config.Zones.mechanicActions.Pos.x, Config.Zones.mechanicActions.Pos.y, Config.Zones.mechanicActions.Pos.z)
   SetBlipSprite (blip, 446)
   SetBlipDisplay(blip, 4)
   SetBlipScale  (blip, 1.8)
@@ -1052,7 +1052,7 @@ end)
 Citizen.CreateThread(function()
   while true do
     Wait(0)
-    if PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+    if PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
 
       local coords = GetEntityCoords(GetPlayerPed(-1))
 
@@ -1069,7 +1069,7 @@ end)
 Citizen.CreateThread(function()
   while true do
     Wait(0)
-    if PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+    if PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
       local coords      = GetEntityCoords(GetPlayerPed(-1))
       local isInMarker  = false
       local currentZone = nil
@@ -1082,11 +1082,11 @@ Citizen.CreateThread(function()
       if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
         HasAlreadyEnteredMarker = true
         LastZone                = currentZone
-        TriggerEvent('esx_mecanojob:hasEnteredMarker', currentZone)
+        TriggerEvent('esx_mechanicjob:hasEnteredMarker', currentZone)
       end
       if not isInMarker and HasAlreadyEnteredMarker then
         HasAlreadyEnteredMarker = false
-        TriggerEvent('esx_mecanojob:hasExitedMarker', LastZone)
+        TriggerEvent('esx_mechanicjob:hasExitedMarker', LastZone)
       end
     end
   end
@@ -1130,14 +1130,14 @@ Citizen.CreateThread(function()
     if closestDistance ~= -1 and closestDistance <= 3.0 then
 
       if LastEntity ~= closestEntity then
-        TriggerEvent('esx_mecanojob:hasEnteredEntityZone', closestEntity)
+        TriggerEvent('esx_mechanicjob:hasEnteredEntityZone', closestEntity)
         LastEntity = closestEntity
       end
 
     else
 
       if LastEntity ~= nil then
-        TriggerEvent('esx_mecanojob:hasExitedEntityZone', LastEntity)
+        TriggerEvent('esx_mechanicjob:hasExitedEntityZone', LastEntity)
         LastEntity = nil
       end
 
@@ -1157,18 +1157,18 @@ Citizen.CreateThread(function()
           AddTextComponentString(CurrentActionMsg)
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 
-          if IsControlJustReleased(0, 38) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+          if IsControlJustReleased(0, 38) and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
 
-            if CurrentAction == 'mecano_actions_menu' then
-                OpenMecanoActionsMenu()
+            if CurrentAction == 'mechanic_actions_menu' then
+                OpenmechanicActionsMenu()
             end
 
-            if CurrentAction == 'mecano_harvest_menu' then
-                OpenMecanoHarvestMenu()
+            if CurrentAction == 'mechanic_harvest_menu' then
+                OpenmechanicHarvestMenu()
             end
 
-            if CurrentAction == 'mecano_craft_menu' then
-                OpenMecanoCraftMenu()
+            if CurrentAction == 'mechanic_craft_menu' then
+                OpenmechanicCraftMenu()
             end
 
             if CurrentAction == 'delete_vehicle' then
@@ -1176,7 +1176,7 @@ Citizen.CreateThread(function()
               if Config.EnableSocietyOwnedVehicles then
 
                 local vehicleProps = ESX.Game.GetVehicleProperties(CurrentActionData.vehicle)
-                TriggerServerEvent('esx_society:putVehicleInGarage', 'mecano', vehicleProps)
+                TriggerServerEvent('esx_society:putVehicleInGarage', 'mechanic', vehicleProps)
 
               else
 
@@ -1185,7 +1185,7 @@ Citizen.CreateThread(function()
                   GetEntityModel(vehicle) == GetHashKey('towtruck2') or
                   GetEntityModel(vehicle) == GetHashKey('slamvan3')
                 then
-                  TriggerServerEvent('esx_service:disableService', 'mecano')
+                  TriggerServerEvent('esx_service:disableService', 'mechanic')
                 end
 
               end
@@ -1201,11 +1201,11 @@ Citizen.CreateThread(function()
           end
         end
 
-        if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
-            OpenMobileMecanoActionsMenu()
+        if IsControlJustReleased(0, Keys['F6']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
+            OpenMobilemechanicActionsMenu()
         end
 
-        if IsControlJustReleased(0, Keys['DELETE']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+        if IsControlJustReleased(0, Keys['DELETE']) and not IsDead and PlayerData.job ~= nil and PlayerData.job.name == 'mechanic' then
 
           if NPCOnJob then
 
