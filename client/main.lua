@@ -169,7 +169,7 @@ function OpenMechanicActionsMenu()
             }
 
             if Config.EnablePlayerManagement and PlayerData.job ~= nil and
-              (PlayerData.job.grade_name == 'boss' or PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'experimente') then
+              (PlayerData.job.grade_name == 'boss' or PlayerData.job.grade_name == 'chef' or PlayerData.job.grade_name == 'experienced') then
               table.insert(elements, {label = 'SlamVan', value = 'slamvan3'})
             end
 
@@ -263,7 +263,7 @@ end
 
 function OpenmechanicHarvestMenu()
 
-  if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrue' then
+  if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name ~= 'recrute' then
     local elements = {
       {label = _U('gas_can'), value = 'gaz_bottle'},
       {label = _U('repair_tools'), value = 'fix_tool'},
